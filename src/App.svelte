@@ -1,17 +1,17 @@
 <script>
-    let busca = '';
+    let buscarRecomendacoes = '';
 
 	function handleSubmit() {
-		alert(`"${busca}"`);
+		alert(`"${buscarRecomendacoes}"`);
 	}
 	import { onMount } from 'svelte';
 
 	let artistas = [];
-	let texto = [];
+	let textos = [];
   onMount(async function() {
 	  const res = await fetch(`http://localhost:8888/recomend`);
 		artistas = await res.json();
-		texto =  JSON.stringify(artistas);
+		textos =  JSON.stringify(artistas);
 		console.log(artistas)
     
   });
@@ -22,7 +22,7 @@
 
 <main>
    <form on:submit|preventDefault={handleSubmit}>
-	<input type="search"  id="search" bind:value={busca} placeholder="Pesquisar">
+	<input type="search"  id="search" bind:value={buscarRecomendacoes} placeholder="Pesquisar">
 
 
 	<button type=submit>
@@ -30,14 +30,20 @@
 	</button>
     </form>
 	<h1>Artistas recomendados</h1>
+	
+	{#each textos as texto}
+		{texto}
+	{/each}
 
 
-<ul>
-	{artistas}
-</ul>
+ 
+
+
 	
 	    
 </main>
+
+ <p> <textos></p>
 
 <style>
 	main {
